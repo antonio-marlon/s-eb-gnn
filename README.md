@@ -13,7 +13,7 @@ A lightweight framework for **semantic-aware resource allocation in THz/RIS-enab
 ## Demo
 ![Semantic Demo](demo_screenshot.png)
 
-> This work is open-source. If you use it in research, consider supporting further development via [Ko-fi](https://ko-fi.com/antonio-marlon).
+> This work is open-source. If you use it in research or industry, the full bundle is available [here](https://ko-fi.com/s/4a88e99001).
 
 ## Get Started
 ```bash
