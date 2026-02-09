@@ -1,6 +1,5 @@
 # S-EB-GNN: Semantic Energy-Based GNN for 6G
 
-[![Sponsor](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=white)](https://github.com/sponsors/seu-usuario)
 [![Sponsor](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=white)](https://github.com/sponsors/antonio-marlon)
 
 A lightweight framework for **semantic-aware resource allocation in THz/RIS-enabled 6G networks**.
@@ -18,7 +17,3 @@ A lightweight framework for **semantic-aware resource allocation in THz/RIS-enab
 ```bash
 pip install jax equinox matplotlib
 python demo_semantic.ipynb
-
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
