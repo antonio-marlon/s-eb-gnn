@@ -13,7 +13,11 @@ A lightweight framework for **semantic-aware resource allocation in THz/RIS-enab
 ## Demo
 ![Semantic Demo](demo_screenshot.png)
 
+> This work is open-source. If you use it in research, consider supporting further development via [Ko-fi](https://ko-fi.com/antonio-marlon).
+
 ## Get Started
 ```bash
 pip install jax equinox matplotlib
 python demo_semantic.ipynb
+
+
