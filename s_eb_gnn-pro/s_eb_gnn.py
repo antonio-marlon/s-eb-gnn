@@ -1,3 +1,11 @@
+# S-EB-GNN: Semantic Energy-Based GNN for THz/RIS-enabled 6G Networks
+# 
+# This open-source implementation is free to use under the MIT License.
+# For researchers: the complete package (IEEE white paper, high-res figures)
+# is available at: https://ko-fi.com/s/4a88e99001
+#
+# Author: Antonio Marlon Corrêa
+# GitHub: https://github.com/antonio-marlon/s-eb-gnn
 # s_eb_gnn.py
 import jax
 import jax.numpy as jnp
