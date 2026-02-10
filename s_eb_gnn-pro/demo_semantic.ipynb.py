@@ -137,3 +137,5 @@ plt.savefig("energy_convergence.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 print(f"📉 Final energy after convergence: {energy_history[-1]:.2f}")
+
+#Get the full white paper & figures: [Pro Bundle](https://ko-fi.com/s/4a88e99001)
