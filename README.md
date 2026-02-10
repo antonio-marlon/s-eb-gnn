@@ -1,7 +1,6 @@
 # S-EB-GNN: Semantic Energy-Based GNN for 6G
 
 [![Sponsor](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=white)](https://github.com/sponsors/antonio-marlon)
- 📖 [How S-EB-GNN Achieves Negative Energy](technical_note.md)
 
 A lightweight framework for **semantic-aware resource allocation in THz/RIS-enabled 6G networks**.
 
