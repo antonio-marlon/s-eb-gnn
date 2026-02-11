@@ -1,11 +1,10 @@
 # S-EB-GNN: Semantic Energy-Based GNN for 6G
 
 [![Sponsor](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=white)](https://github.com/sponsors/antonio-marlon)
-106+ researchers have cloned this repo in 72 hours.
-
-![Clones](https://img.shields.io/badge/clones-50%2B-blue?logo=github)
-💰 **Pro Bundle**: US$ 70 (first 5 buyers) → [Get it](https://ko-fi.com/s/4a88e99001)
-
+> 📈 **106+ researchers cloned this repo in 72h**  
+> 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
+> 💰 **Pro Bundle**: US$ 70 (first 5 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
+> 
 A lightweight framework for **semantic-aware resource allocation in THz/RIS-enabled 6G networks**.
 
 ## Features
