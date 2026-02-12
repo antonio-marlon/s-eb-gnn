@@ -9,9 +9,9 @@
 Lightweight JAX implementation of **quantum-inspired** semantic-aware resource allocation for THz/RIS-enabled 6G networks. Achieves negative energy states (e.g., −6.60) under semantic prioritization (Critical > Video > IoT).
 
 
-## Features
 - Physics-based THz channel modeling (path loss, blockage)
 - Reconfigurable Intelligent Surfaces (RIS) support
+- **Quantum-inspired semantic refinement via graph kernels**
 - Semantic prioritization (Critical > Video > IoT)
 - Energy-based optimization with negative energy convergence
 
