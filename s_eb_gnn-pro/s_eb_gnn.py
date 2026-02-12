@@ -1,11 +1,3 @@
-# S-EB-GNN: Semantic Energy-Based GNN for THz/RIS-enabled 6G Networks
-# 
-# This open-source implementation is free to use under the MIT License.
-# For researchers: the complete package (IEEE white paper, high-res figures)
-# is available at: https://ko-fi.com/s/4a88e99001
-#
-# Author: Antonio Marlon Corrêa
-# GitHub: https://github.com/antonio-marlon/s-eb-gnn
 # s_eb_gnn.py
 import jax
 import jax.numpy as jnp
@@ -16,6 +8,46 @@ from typing import List
 def normalize(x, eps=1e-8):
     """Normalize vectors along the last axis."""
     return x / (jnp.linalg.norm(x, axis=-1, keepdims=True) + eps)
+
+
+# --- QUANTUM-INSPIRED UTILS (new, minimal) ---
+def quantum_attention_kernel(x_i, x_j, gamma=0.1):
+    """Simulates quantum fidelity between node states (classical simulation)."""
+    norm_i = jnp.linalg.norm(x_i)
+    norm_j = jnp.linalg.norm(x_j)
+    inner = jnp.dot(x_i, x_j)
+    return jnp.exp(-gamma * (norm_i ** 2 + norm_j ** 2 - 2 * inner))
+
+
+def create_quantum_semantic_adjacency(adj_physical, user_types, node_features, base_weights=[0.5, 1.0, 5.0]):
+    """
+    Enhance physical adjacency using quantum graph kernels for semantic refinement.
+
+    Args:
+        adj_physical: (N, N) physical adjacency matrix
+        user_types: (N,) array of semantic types (0=IoT, 1=Video, 2=Critical)
+        node_features: (N, D) current node features
+        base_weights: list of base weights [IoT, Video, Critical]
+
+    Returns:
+        (N, N) quantum-enhanced semantic adjacency matrix
+    """
+    N = adj_physical.shape[0]
+    base_priority = jnp.array(base_weights)[user_types]
+
+    # Compute quantum similarity to "critical" prototype
+    critical_proto = jnp.ones_like(node_features[0]) * 5.0  # ideal critical state
+    quantum_sim = jnp.array([
+        quantum_attention_kernel(node_features[i], critical_proto)
+        for i in range(N)
+    ])
+
+    # Refine weights with quantum similarity
+    refined_weights = base_priority * (1.0 + 0.5 * quantum_sim)
+
+    # Apply quantum-enhanced boost
+    boost = refined_weights[:, None] * refined_weights[None, :]
+    return adj_physical * (1.0 + 0.3 * boost)
 
 
 class MessagePassing(eqx.Module):
@@ -109,7 +141,7 @@ def add_ris_to_features(x, ris_indices, phase_shifts):
     return x.at[ris_indices, 0].set(phase_shifts)
 
 
-# === Semantic Layer ===
+# === Semantic Layer (original, kept for backward compatibility) ===
 def create_semantic_adjacency(adj_physical, user_types, semantic_weights):
     """
     Enhance physical adjacency with semantic prioritization.
