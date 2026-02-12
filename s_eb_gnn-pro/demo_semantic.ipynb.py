@@ -1,14 +1,15 @@
 # %% [markdown]
-# # S-EB-GNN: Semantic-Aware Resource Allocation for THz/RIS-Enabled 6G Networks
-# Demonstration of semantic communication impact in 6G networks with THz and RIS.
+# # S-EB-GNN-Q: Quantum-Inspired Semantic Resource Allocation for 6G
+# Lightweight JAX implementation for THz/RIS-enabled 6G networks.
+# Achieves negative energy states (e.g., −6.60) under semantic prioritization (Critical > Video > IoT).
+# Open-source (MIT License). Full bundle available at: https://ko-fi.com/s/4a88e99001
 
 # %%
-
 import jax
 import jax.numpy as jnp
 from s_eb_gnn import (
     SEBGNN, create_thz_adjacency, add_ris_to_features,
-    create_semantic_adjacency, solve_allocation, normalize
+    create_quantum_semantic_adjacency, solve_allocation, normalize
 )
 import matplotlib.pyplot as plt
 
@@ -24,9 +25,9 @@ ris_nodes = jnp.array([10, 11])  # Indices of RIS nodes
 pos = jax.random.uniform(key, (N, 2)) * 100  # up to 100 meters
 distances = jnp.sqrt(jnp.sum((pos[:, None, :] - pos[None, :, :])**2, axis=-1))
 
-# Frequencies for all N nodes
+# Frequencies for all N nodes (GHz)
 freqs = jnp.where(jnp.arange(N) < 5, 3.5, 140.0)
-freqs = freqs.at[ris_nodes].set(140.0)  # Ensure RIS operate in THz
+freqs = freqs.at[ris_nodes].set(140.0)  # RIS operate in THz
 
 # User types: 0=IoT, 1=Video, 2=Critical
 user_types = jnp.array([0]*5 + [1]*3 + [2]*2 + [0]*2)
@@ -48,18 +49,17 @@ x = add_ris_to_features(x, ris_nodes, phase_shifts)
 # Create physical adjacency matrix (THz + blockage)
 adj_thz = create_thz_adjacency(distances, freqs, blocked)
 
-# Semantic weights: Critical >> Video > IoT
-semantic_weights = [0.5, 1.0, 5.0]
-
-# Apply semantic layer
-adj_semantic = create_semantic_adjacency(adj_thz, user_types, semantic_weights)
+# Apply quantum-inspired semantic layer
+adj_semantic = create_quantum_semantic_adjacency(
+    adj_thz, user_types, x, base_weights=[0.5, 1.0, 5.0]
+)
 
 # %%
 # Initialize model
 model_key, train_key = jax.random.split(key)
-model = SEBGNN(depth=3, dim=D, semantic_weights=semantic_weights, key=model_key)
+model = SEBGNN(depth=3, dim=D, semantic_weights=[0.5, 1.0, 5.0], key=model_key)
 
-# Solve resource allocation
+# Solve resource allocation via energy minimization
 alloc = solve_allocation(model, x, adj_semantic, user_types, steps=50, lr=0.1)
 
 # Compute final energy
@@ -75,9 +75,9 @@ im1 = axes[0].imshow(adj_thz, cmap='viridis', vmin=0, vmax=1)
 axes[0].set_title('Physical Adjacency\n(THz + Blockage)')
 plt.colorbar(im1, ax=axes[0], fraction=0.046, pad=0.04)
 
-# Semantic adjacency
+# Quantum semantic adjacency
 im2 = axes[1].imshow(adj_semantic, cmap='plasma', vmin=0, vmax=jnp.max(adj_semantic))
-axes[1].set_title('Semantic Adjacency\n(With Prioritization)')
+axes[1].set_title('Quantum Semantic Adjacency\n(Kernel-Refined Prioritization)')
 plt.colorbar(im2, ax=axes[1], fraction=0.046, pad=0.04)
 
 # Final allocation
@@ -89,7 +89,7 @@ for i in range(N):
     elif i == 5: label = 'Video'
     elif i == 8: label = 'Critical'
     axes[2].scatter(alloc[i, 0], alloc[i, 1], c=colors[ut], label=label, s=80)
-axes[2].set_title('Final Allocation\n(Colors = Semantic Type)')
+axes[2].set_title('Final Allocation\n(Negative Energy: {:.2f})'.format(final_energy))
 axes[2].legend()
 
 plt.tight_layout()
@@ -137,5 +137,3 @@ plt.savefig("energy_convergence.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 print(f"📉 Final energy after convergence: {energy_history[-1]:.2f}")
-
-#Get the full white paper & figures: [Pro Bundle](https://ko-fi.com/s/4a88e99001)
