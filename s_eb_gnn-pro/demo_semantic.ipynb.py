@@ -63,12 +63,23 @@ model = SEBGNN(depth=3, dim=D, semantic_weights=[0.5, 1.0, 5.0], key=model_key)
 # === BENCHMARKING FUNCTION ===
 def semantic_efficiency(alloc, user_types):
     critical_mask = (user_types == 2)
-    non_critical_mask = ~critical_mask
-    if jnp.sum(critical_mask) == 0 or jnp.sum(non_critical_mask) == 0:
+    non_critical_mask = (user_types != 2)
+
+    # Filter out near-zero allocations
+    def safe_norms(vecs):
+        norms = jnp.linalg.norm(vecs, axis=1)
+        return norms[norms > 1e-3]  # ignore negligible allocations
+
+    crit_norms = safe_norms(alloc[critical_mask])
+    non_norms = safe_norms(alloc[non_critical_mask])
+
+    if len(crit_norms) == 0 or len(non_norms) == 0:
         return jnp.array(0.0)
-    critical_norm = jnp.mean(jnp.linalg.norm(alloc[critical_mask], axis=1))
-    non_critical_norm = jnp.mean(jnp.linalg.norm(alloc[non_critical_mask], axis=1))
-    return critical_norm / (non_critical_norm + 1e-8)
+
+    mean_crit = jnp.mean(crit_norms)
+    mean_non = jnp.mean(non_norms)
+
+    return mean_crit / jnp.maximum(mean_non, 1e-6)
 
 def time_allocation(fn, *args, **kwargs):
     start = time.time()
