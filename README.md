@@ -2,12 +2,12 @@
 
 [![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-YouTube-red?logo=youtube)](https://youtu.be/7Ng696Rku24)
 
-> 📈 **106+ researchers cloned this repo in 72h**  
-> 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**  
-> 💰 **Pro Bundle**: US$ 70 (first 5 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
+> 📈 **186+ clones in 7 days**  
+> 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
+> 💰 **Pro Bundle**: US$ 70 (**first 10 buyers**) → [Get it now](https://ko-fi.com/s/4a88e99001)
 
-> 
-A lightweight framework for **semantic-aware resource allocation in THz/RIS-enabled 6G networks**.
+Lightweight JAX implementation of semantic-aware resource allocation for THz/RIS-enabled 6G networks. Achieves negative energy states (e.g., −6.60) under semantic prioritization (Critical > Video > IoT).
+
 
 ## Features
 - Physics-based THz channel modeling (path loss, blockage)
