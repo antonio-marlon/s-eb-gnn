@@ -1,12 +1,12 @@
-# S-EB-GNN: Semantic Energy-Based GNN for 6G
+# S-EB-GNN-Q: Quantum-Inspired Semantic Resource Allocation for 6G
 
-[![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-YouTube-red?logo=youtube)](https://youtu.be/7Ng696Rku24)
+[![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-YouTube-red?logo=youtube)](https://www.youtube.com/watch?v=7Ng696Rku24)
 
 > 📈 **186+ clones in 7 days**  
 > 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
-> 💰 **Pro Bundle**: US$ 70 (**first 10 buyers**) → [Get it now](https://ko-fi.com/s/4a88e99001)
+> 💰 **Pro Bundle**: US$ 70 (first 10 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
 
-Lightweight JAX implementation of semantic-aware resource allocation for THz/RIS-enabled 6G networks. Achieves negative energy states (e.g., −6.60) under semantic prioritization (Critical > Video > IoT).
+Lightweight JAX implementation of **quantum-inspired** semantic-aware resource allocation for THz/RIS-enabled 6G networks. Achieves negative energy states (e.g., −6.60) under semantic prioritization (Critical > Video > IoT).
 
 
 ## Features
