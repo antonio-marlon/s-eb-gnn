@@ -171,4 +171,4 @@ plt.tight_layout()
 plt.savefig("energy_convergence.png", dpi=300, bbox_inches='tight')
 plt.show()
 
-print(f"📉 Final energy after convergence: {energy_history[-1]:.2f}")")
+print(f"📉 Final energy after convergence: {energy_history[-1]:.2f}")
