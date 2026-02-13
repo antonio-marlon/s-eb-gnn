@@ -5,6 +5,8 @@
 # %%
 import jax
 import jax.numpy as jnp
+import matplotlib
+matplotlib.use('Agg')
 from s_eb_gnn import (
     SEBGNN, create_thz_adjacency, add_ris_to_features,
     create_quantum_semantic_adjacency, solve_allocation, normalize
