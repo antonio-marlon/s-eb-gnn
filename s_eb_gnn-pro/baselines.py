@@ -47,3 +47,34 @@ def wmmse_baseline(adj_matrix, user_types, max_iter=10, power_budget=1.0):
             alloc = alloc * jnp.sqrt(power_budget / (total_power + 1e-8))
 
     return alloc
+
+
+def heuristic_scheduler(adj_matrix, user_types, power_budget=1.0, min_alloc=0.05):
+    """
+    Robust heuristic scheduler with semantic priority and minimum allocation.
+    - Critical (2) > Video (1) > IoT (0)
+    - Guarantees min_alloc per user to avoid zero-energy collapse
+    """
+    N = adj_matrix.shape[0]
+    D = 8
+
+    # Semantic priorities
+    priorities = jnp.array([0.5, 1.0, 5.0])
+    weights = priorities[user_types]  # (N,)
+
+    # Ensure minimum allocation
+    base_alloc = jnp.full((N, D), min_alloc)
+
+    # Compute extra power to distribute
+    base_power = jnp.sum(base_alloc ** 2)  # total power used by min alloc
+    remaining_power = jnp.maximum(power_budget - base_power, 0.0)
+
+    if remaining_power > 0:
+        # Distribute remaining power proportionally to priorities
+        total_weight = jnp.sum(weights)
+        extra_per_user = weights / total_weight * remaining_power
+        # Convert to per-dimension allocation
+        extra_dim = jnp.sqrt(extra_per_user[:, None] / D)
+        base_alloc = base_alloc + extra_dim
+
+    return base_alloc
