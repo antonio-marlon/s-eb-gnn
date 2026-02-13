@@ -90,6 +90,9 @@ def time_allocation(fn, *args, **kwargs):
     return result, latency_ms
 
 # === RUN BENCHMARK ===
+# Import the new baseline
+from baselines import wmmse_baseline, heuristic_scheduler
+
 # S-EB-GNN-Q
 alloc_ours, latency_ours = time_allocation(
     solve_allocation, model, x, adj_semantic, user_types, steps=50, lr=0.1
@@ -104,16 +107,34 @@ alloc_wmmse, latency_wmmse = time_allocation(
 energy_wmmse = model(alloc_wmmse, adj_semantic, user_types)
 eff_wmmse = semantic_efficiency(alloc_wmmse, user_types)
 
+# Heuristic baseline
+alloc_heuristic, latency_heuristic = time_allocation(
+    heuristic_scheduler, adj_thz, user_types, power_budget=1.0
+)
+energy_heuristic = model(alloc_heuristic, adj_semantic, user_types)
+eff_heuristic = semantic_efficiency(alloc_heuristic, user_types)
+
+
 # === PRINT RESULTS ===
-print("="*50)
-print("📊 BENCHMARK: S-EB-GNN-Q vs WMMSE")
-print("="*50)
-print(f"{'Metric':<20} {'S-EB-GNN-Q':<15} {'WMMSE':<15}")
-print("-"*50)
-print(f"{'Final Energy':<20} {energy_ours:<15.2f} {energy_wmmse:<15.2f}")
-print(f"{'Semantic Eff.':<20} {eff_ours:<15.2f} {eff_wmmse:<15.2f}")
-print(f"{'Latency (ms)':<20} {latency_ours:<15.1f} {latency_wmmse:<15.1f}")
-print("="*50)
+print("="*65)
+print("📊 BENCHMARK: S-EB-GNN-Q vs WMMSE vs Heuristic")
+print("="*65)
+print(f"{'Metric':<20} {'S-EB-GNN-Q':<15} {'WMMSE':<15} {'Heuristic':<15}")
+print("-"*65)
+print(f"{'Final Energy':<20} {energy_ours:<15.2f} {energy_wmmse:<15.2f} {energy_heuristic:<15.2f}")
+print(f"{'Semantic Eff.':<20} {eff_ours:<15.2f} {eff_wmmse:<15.2f} {eff_heuristic:<15.2f}")
+print(f"{'Latency (ms)':<20} {latency_ours:<15.1f} {latency_wmmse:<15.1f} {latency_heuristic:<15.1f}")
+print("="*65)
+
+# Save to CSV
+with open('benchmark_results.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(['Metric', 'S-EB-GNN-Q', 'WMMSE', 'Heuristic'])
+    writer.writerow(['Final Energy', energy_ours.item(), energy_wmmse.item(), energy_heuristic.item()])
+    writer.writerow(['Semantic Efficiency', eff_ours.item(), eff_wmmse.item(), eff_heuristic.item()])
+    writer.writerow(['Latency (ms)', latency_ours, latency_wmmse, latency_heuristic])
+
+print("💾 Results saved to benchmark_results.csv")
 
 # Save to CSV
 with open('benchmark_results.csv', 'w', newline='') as f:
