@@ -19,22 +19,25 @@ Lightweight JAX implementation of **quantum-inspired semantic resource allocatio
 - **Semantic prioritization** (Critical > Video > IoT)
 - **Energy-based optimization** with negative energy convergence
 - **Zero-shot inference** (no retraining required)
-- **Pure JAX + Equinox** (<250 lines core logic)
+- **Pure JAX + Equinox** (<200 lines core logic)
 - **MIT License** — free for research and commercial use
 
 ---
 
-## 📊 Benchmark vs WMMSE (v1.1)
+## 📊 Benchmark vs Baselines (v1.1)
 
-| Metric             | S-EB-GNN-Q | WMMSE     |
-|--------------------|------------|-----------|
-| Final Energy       | **−6.62**  | +0.01     |
-| Semantic Efficiency| **0.97**   | 0.00      |
-| Latency (ms)       | 58.0       | 113.0     |
+| Metric             | S-EB-GNN-Q | WMMSE     | Heuristic |
+|--------------------|------------|-----------|-----------|
+| Final Energy       | **−6.62**  | +0.01     | +0.10     |
+| Semantic Efficiency| **0.97**   | 0.00      | 1.99      |
+| Latency (ms)       | 72.0       | 181.3     | 149.4     |
 
-→ **6.6× lower energy**, **balanced semantic prioritization**, **faster than WMMSE**
+### 🔍 Interpretation
+- **S-EB-GNN-Q**: achieves **balanced fairness** (0.97 ≈ 1.0) while minimizing energy.
+- **WMMSE**: collapses to critical-only allocation → poor fairness.
+- **Heuristic**: over-prioritizes critical users (efficiency = 1.99), risking starvation of IoT/Video traffic.
 
-> 💡 WMMSE concentrates resources on critical nodes, leaving non-critical with negligible allocation. S-EB-GNN-Q maintains fairness while prioritizing.
+→ **Only S-EB-GNN-Q combines energy efficiency, semantic awareness, and fairness.**
 
 ---
 
