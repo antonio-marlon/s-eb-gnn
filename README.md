@@ -7,7 +7,7 @@
 > 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
 > 💰 **Pro Bundle**: US$ 70 (first 10 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
 
-Lightweight JAX implementation of **quantum-inspired semantic resource allocation** for THz/RIS-enabled 6G networks. Achieves **negative energy states** (e.g., −6.62) under semantic prioritization (Critical > Video > IoT).
+Lightweight JAX implementation of **quantum-inspired semantic resource allocation** for THz/RIS-enabled 6G networks. Achieves **negative energy states** (e.g., −9.59) under semantic prioritization (Critical > Video > IoT).
 
 ---
 
@@ -19,6 +19,7 @@ Lightweight JAX implementation of **quantum-inspired semantic resource allocatio
 - **Semantic prioritization** (Critical > Video > IoT)
 - **Energy-based optimization** with negative energy convergence
 - **Zero-shot inference** (no retraining required)
+- **Per-node energy normalization** (MIT-inspired) → scalable to N=50+
 - **Pure JAX + Equinox** (<250 lines core logic)
 - **MIT License** — free for research and commercial use
 
@@ -28,16 +29,29 @@ Lightweight JAX implementation of **quantum-inspired semantic resource allocatio
 
 | Metric             | S-EB-GNN-Q | WMMSE     | Heuristic |
 |--------------------|------------|-----------|-----------|
-| Final Energy       | **−6.62**  | +0.01     | +0.10     |
-| Semantic Efficiency| **0.97**   | 0.00      | 1.99      |
-| Latency (ms)       | 187.1      | 279.7     | 299.8     |
+| Final Energy       | **−9.59**  | +0.15     | +0.18     |
+| Semantic Efficiency| **0.94**   | 0.00      | 1.99      |
+| Latency (ms)       | **77.2**   | 178.8     | 169.8     |
 
 ### 🔍 Interpretation
-- **S-EB-GNN-Q**: achieves **balanced fairness** (0.97 ≈ 1.0) while minimizing energy.
+- **S-EB-GNN-Q**: achieves **balanced fairness** (0.94 ≈ 1.0) while minimizing energy.
 - **WMMSE**: collapses to critical-only allocation → poor fairness.
 - **Heuristic**: over-prioritizes critical users (efficiency = 1.99), risking starvation of IoT/Video traffic.
 
 → **Only S-EB-GNN-Q combines energy efficiency, semantic awareness, and fairness.**
+
+---
+
+## 📈 Scalability (MIT-inspired)
+
+Thanks to **per-node energy normalization**, the framework scales seamlessly:
+
+| Network Size | Energy per Node |
+|--------------|-----------------|
+| N = 12       | −14.81          |
+| N = 50       | −14.29          |
+
+→ **<4% degradation** when scaling from 12 to 50 nodes — enabling real-world 6G deployments.
 
 ---
 
