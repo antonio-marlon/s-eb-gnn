@@ -95,12 +95,28 @@ class SEBGNN(eqx.Module):
         self.layers = [MessagePassing(dim, keys[i]) for i in range(depth)]
         self.energy = SemanticEnergyHead(dim, semantic_weights, keys[-1])
 
-    def __call__(self, x: jnp.ndarray, adj: jnp.ndarray, user_types: jnp.ndarray) -> jnp.ndarray:
-        """Forward pass through the Semantic Energy-Based GNN."""
+        def __call__(self, x, adj, user_types):
+        """
+        Energy-based GNN with per-node normalization (MIT-inspired).
+        Returns average energy per node (scalar).
+        """
+        # Semantic weights: IoT=0.5, Video=1.0, Critical=5.0
+        semantic_weights = jnp.array([0.5, 1.0, 5.0])
+        weights = semantic_weights[user_types]  # (N,)
+
+        # Apply graph layers
         h = x
         for layer in self.layers:
             h = layer(h, adj)
-        return self.energy(h, user_types)
+
+        # Compute per-node utility (dot product of features)
+        utilities = jnp.sum(h * x, axis=1)  # (N,)
+
+        # Weighted energy per node
+        energy_per_node = -weights * utilities  # (N,)
+
+        # MIT-inspired: return AVERAGE energy (not total)
+        return jnp.mean(energy_per_node)
 
 
 # === THz + RIS ===
