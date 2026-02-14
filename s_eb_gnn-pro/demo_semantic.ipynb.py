@@ -206,3 +206,29 @@ plt.savefig("energy_convergence.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 print(f"📉 Final energy after convergence: {energy_history[-1]:.2f}")
+
+# === SCALABILITY TEST (MIT-inspired) ===
+print("\n🔍 SCALABILITY TEST: N=12 vs N=50")
+for N_test in [12, 50]:
+    # Generate larger scenario
+    key_test = jax.random.PRNGKey(42 + N_test)
+    pos_test = jax.random.uniform(key_test, (N_test, 2)) * 100
+    distances_test = jnp.sqrt(jnp.sum((pos_test[:, None, :] - pos_test[None, :, :]) ** 2, axis=-1))
+
+    # Simplified setup
+    freqs_test = jnp.where(jnp.arange(N_test) < N_test // 2, 3.5, 140.0)
+    ris_nodes_test = jnp.array([N_test - 2, N_test - 1]) if N_test > 10 else jnp.array([])
+    user_types_test = jnp.tile(jnp.array([0, 1, 2]), N_test // 3 + 1)[:N_test]
+    x_test = jax.random.normal(key_test, (N_test, D))
+
+    adj_thz_test = create_thz_adjacency(distances_test, freqs_test,
+                                        jax.random.bernoulli(key_test, 0.3, (N_test, N_test)))
+    adj_semantic_test = create_quantum_semantic_adjacency(adj_thz_test, user_types_test, x_test)
+
+    # Run allocation
+    alloc_test, _ = time_allocation(
+        solve_allocation, model, x_test, adj_semantic_test, user_types_test, steps=50, lr=0.1
+    )
+    energy_test = model(alloc_test, adj_semantic_test, user_types_test)
+
+    print(f"N={N_test:2d} → Energy per node: {energy_test:.2f}")
