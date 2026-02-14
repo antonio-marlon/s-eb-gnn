@@ -1,9 +1,9 @@
 # S-EB-GNN-Q: Quantum-Inspired Semantic Resource Allocation for 6G
 
 [![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-YouTube-red?logo=youtube)](https://www.youtube.com/watch?v=7Ng696Rku24)
-[![GitHub Clones](https://img.shields.io/badge/245+_clones_in_14_days-blue)](https://github.com/antonio-marlon/s-eb-gnn)
+[![GitHub Clones](https://img.shields.io/badge/283+_clones_in_14_days-blue)](https://github.com/antonio-marlon/s-eb-gnn)
 
-> 📈 **245+ clones in 14 days**  
+> 📈 **283+ clones in 14 days**  
 > 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
 > 💰 **Pro Bundle**: US$ 70 (first 10 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
 
@@ -19,7 +19,7 @@ Lightweight JAX implementation of **quantum-inspired semantic resource allocatio
 - **Semantic prioritization** (Critical > Video > IoT)
 - **Energy-based optimization** with negative energy convergence
 - **Zero-shot inference** (no retraining required)
-- **Pure JAX + Equinox** (<200 lines core logic)
+- **Pure JAX + Equinox** (<250 lines core logic)
 - **MIT License** — free for research and commercial use
 
 ---
@@ -30,7 +30,7 @@ Lightweight JAX implementation of **quantum-inspired semantic resource allocatio
 |--------------------|------------|-----------|-----------|
 | Final Energy       | **−6.62**  | +0.01     | +0.10     |
 | Semantic Efficiency| **0.97**   | 0.00      | 1.99      |
-| Latency (ms)       | 72.0       | 181.3     | 149.4     |
+| Latency (ms)       | 187.1      | 279.7     | 299.8     |
 
 ### 🔍 Interpretation
 - **S-EB-GNN-Q**: achieves **balanced fairness** (0.97 ≈ 1.0) while minimizing energy.
