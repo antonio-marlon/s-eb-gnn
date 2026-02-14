@@ -54,16 +54,6 @@ Thanks to **per-node energy normalization**, the framework scales seamlessly:
 → **<4% degradation** when scaling from 12 to 50 nodes — enabling real-world 6G deployments.
 
 ---
-
-### 🛠️ Recommended Cloud Tools
-
-To scale your experiments, we recommend:
-
-- **[RunPod]([https://runpod.io?ref=SEU_ID_AQUI](https://runpod.io?ref=k5a0ttk7))**: Rent A100/H100 GPUs from $0.29/hr. Free $10 credit for new users.  
-
-
-> 💡 Both tools integrate seamlessly with JAX and require minimal setup.
-
 ## ▶️ Quick Start
 
 ```bash
