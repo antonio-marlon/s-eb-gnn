@@ -3,7 +3,7 @@
 [![Watch Demo](https://img.shields.io/badge/▶️_Watch_Demo-YouTube-red?logo=youtube)](https://www.youtube.com/watch?v=7Ng696Rku24)
 [![GitHub Clones](https://img.shields.io/badge/283+_clones_in_14_days-blue)](https://github.com/antonio-marlon/s-eb-gnn)
 
-> 📈 **283+ clones in 14 days**  
+> 📈 **329+ cloned this repo in 14 days**  
 > 💬 *“Well aligned with AI-native wireless systems.”* — **Prof. Merouane Debbah**, Center Director, 6G Research Center  
 > 💰 **Pro Bundle**: US$ 70 (first 10 buyers) → [Get it now](https://ko-fi.com/s/4a88e99001)
 
@@ -52,6 +52,31 @@ Thanks to **per-node energy normalization**, the framework scales seamlessly:
 | N = 50       | −14.29          |
 
 → **<4% degradation** when scaling from 12 to 50 nodes — enabling real-world 6G deployments.
+
+
+### ❤️ Support this project
+
+If S-EB-GNN-Q is useful for your research or work, consider becoming a sponsor. Your support ensures continued development, maintenance, and open access.
+
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-red)](https://github.com/sponsors/antonio-marlon)
+
+#### 🧪 Community Supporter – $5/month
+- Early access to public roadmap (`ROADMAP.md`)
+- Name listed in `THANKS.md`
+- Monthly updates on new features
+
+#### 🔬 Research Collaborator – $20/month
+- Everything above, plus:
+- Beta access to new modules (e.g., NS-3 adapter)
+- 15-minute monthly consultation (technical Q&A)
+- Vote on upcoming features
+
+#### 🏢 Lab License Partner – $100/month
+- Everything above, plus:
+- Official institutional license (commercial use allowed)
+- Priority support (≤48h response)
+- Custom KPI report (energy, latency, fairness)
+- Logo placement in white paper and README
 
 ---
 ## ▶️ Quick Start
