@@ -88,34 +88,38 @@ class SemanticEnergyHead(eqx.Module):
 
 class SEBGNN(eqx.Module):
     layers: List[MessagePassing]
-    energy: SemanticEnergyHead
+    energy_head: SemanticEnergyHead  # Named to avoid conflict with method
 
     def __init__(self, depth: int, dim: int, semantic_weights, key: jax.random.PRNGKey):
         keys = jax.random.split(key, depth + 1)
         self.layers = [MessagePassing(dim, keys[i]) for i in range(depth)]
-        self.energy = SemanticEnergyHead(dim, semantic_weights, keys[-1])
+        # Initialize the energy head defined above
+        self.energy_head = SemanticEnergyHead(dim, semantic_weights, keys[-1])
 
-        def __call__(self, x, adj, user_types):
+    def __call__(self, x, adj, user_types):
         """
-        Energy-based GNN with per-node normalization (MIT-inspired).
-        Returns average energy per node (scalar).
+        Energy-based GNN forward pass.
+        Returns average energy per node.
         """
-        # Semantic weights: IoT=0.5, Video=1.0, Critical=5.0
-        semantic_weights = jnp.array([0.5, 1.0, 5.0])
-        weights = semantic_weights[user_types]  # (N,)
-
-        # Apply graph layers
+        # 1. Apply graph layers (Message Passing)
         h = x
         for layer in self.layers:
             h = layer(h, adj)
 
-        # Compute per-node utility (dot product of features)
+        # 2. Compute semantic weights
+        # Use the weights provided at initialization via the energy head
+        semantic_weights = self.energy_head.semantic_weights
+        weights = semantic_weights[user_types]  # (N,)
+
+        # 3. Compute per-node utility (dot product of latent features)
+        # This measures alignment between initial state and GNN-refined state
         utilities = jnp.sum(h * x, axis=1)  # (N,)
 
-        # Weighted energy per node
+        # 4. Weighted energy per node
+        # Negative energy: we aim to MAXIMIZE utility for critical users
         energy_per_node = -weights * utilities  # (N,)
 
-        # MIT-inspired: return AVERAGE energy (not total)
+        # 5. MIT-inspired: return AVERAGE energy (to keep gradients stable across N)
         return jnp.mean(energy_per_node)
 
 
