@@ -87,6 +87,24 @@ Get everything you need to **replicate, extend, or cite** S-EB-GNN-Q:
 
 ---
 
+## 🏢 Lab & Institutional License
+
+For research labs, universities, or companies that want to use **S-EB-GNN-Q** across teams or in internal R&D:
+
+- **Unlimited use** for all members of your institution  
+- **Commercial R&D allowed** (internal use)  
+- **Custom KPI report** (energy, latency, fairness) included  
+- **Logo placement** in white paper and README (optional)  
+- **Priority support** (≤48h response)
+
+📄 Full terms: [LICENSE-LAB.txt](LICENSE-LAB.txt)  
+📧 **Contact**: antoniomarlondev@gmail.com for pricing and invoice
+
+> 💼 **Academic / Public Lab**: US$ 2,000  
+> 🏢 **Private Company**: US$ 5,000–10,000 (negotiable)
+
+---
+
 ## 🙏 Support Development
 
 If S-EB-GNN-Q is useful for your research or work, consider becoming a [**GitHub Sponsor**](https://github.com/sponsors/antonio-marlon). Your support ensures continued development, maintenance, and open access.
@@ -102,6 +120,8 @@ If S-EB-GNN-Q is useful for your research or work, consider becoming a [**GitHub
 > 🔒 **No teaching or consulting** — only technical maintenance, reproducibility, and open-source innovation.
 
 👉 [**Become a Sponsor**](https://github.com/sponsors/antonio-marlon)
+
+---
 
 ## ▶️ Quick Start
 
