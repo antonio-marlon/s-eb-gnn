@@ -1,4 +1,4 @@
-> 🚀 **Featured on r/MachineLearning (1.2k+ views)!**  
+> 🚀 **Featured on r/MachineLearning (1.5k+ views)!**  
 > Reproduce the −9.59 energy result in **5 minutes** with the **Pro Bundle v1.2** — includes white paper, high-res figures, and ready-to-run notebook.  
 > 👉 [**Get Pro Bundle – US$ 70 (first 10 buyers)**](https://ko-fi.com/s/4a88e99001)  
 > *“Well aligned with AI-native wireless systems.” — Prof. Merouane Debbah*
